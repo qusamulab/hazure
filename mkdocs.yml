@@ -2,9 +2,9 @@ site_name: hazure
 site_description: >-
   Rule-based and unsupervised anomaly detection for time series, on narwhals and
   numpy alone.
-site_url: https://ykus4.github.io/hazure/
-repo_url: https://github.com/ykus4/hazure
-repo_name: ykus4/hazure
+site_url: https://qusamulab.github.io/hazure/
+repo_url: https://github.com/qusamulab/hazure
+repo_name: qusamulab/hazure
 copyright: MIT licensed
 
 theme:

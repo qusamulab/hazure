@@ -2,7 +2,7 @@
   <!-- Absolute, because this file is also PyPI's long description and PyPI
        does not resolve links relative to the repository. The image is on
        `main`, so the URL is live for readers of any branch. -->
-  <img src="https://raw.githubusercontent.com/ykus4/hazure/main/docs/assets/hero.png" alt="hazure" width="720">
+  <img src="https://raw.githubusercontent.com/qusamulab/hazure/main/docs/assets/hero.png" alt="hazure" width="720">
 </p>
 
 
@@ -82,15 +82,15 @@ far as that allows and no further.
 
 ## Documentation
 
-<https://ykus4.github.io/hazure/>
+<https://qusamulab.github.io/hazure/>
 
-- [Quickstart](https://ykus4.github.io/hazure/quickstart/) — one planted anomaly
+- [Quickstart](https://qusamulab.github.io/hazure/quickstart/) — one planted anomaly
   end to end: detect, convert to intervals, score, plot.
-- [Guide](https://ykus4.github.io/hazure/guide/) — which detector suits which
+- [Guide](https://qusamulab.github.io/hazure/guide/) — which detector suits which
   kind of anomaly, and the two behaviours that surprise people most.
-- [How it works](https://ykus4.github.io/hazure/algorithms/) — the mathematics of
+- [How it works](https://qusamulab.github.io/hazure/algorithms/) — the mathematics of
   every scorer, threshold and metric, and where each one's assumptions run out.
-- [API reference](https://ykus4.github.io/hazure/api/) — every public name.
+- [API reference](https://qusamulab.github.io/hazure/api/) — every public name.
 
 ## Details
 

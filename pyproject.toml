@@ -50,9 +50,9 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ykus4/hazure"
-Repository = "https://github.com/ykus4/hazure"
-Issues = "https://github.com/ykus4/hazure/issues"
+Homepage = "https://github.com/qusamulab/hazure"
+Repository = "https://github.com/qusamulab/hazure"
+Issues = "https://github.com/qusamulab/hazure/issues"
 
 [dependency-groups]
 docs = [
