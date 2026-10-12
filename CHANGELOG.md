@@ -188,7 +188,7 @@ contains.
   on demand and caches it, needing nothing beyond the standard library.
   `compare` runs several detectors over either and lays the metrics out side by
   side, alert counts included.
-- **Documentation** at <https://ykus4.github.io/hazure/>: quickstart, guide, six
+- **Documentation** at <https://qusamulab.github.io/hazure/>: quickstart, guide, six
   pages on the mathematics of every scorer, threshold and metric, and a full API
   reference. Every example in every docstring is executed by the test suite, so a
   documented output that has drifted from the code is a test failure.
