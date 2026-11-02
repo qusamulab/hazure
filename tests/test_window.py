@@ -1,10 +1,9 @@
 """Tests for the rolling window engine.
 
 Window semantics follow ``pandas.Series.rolling``, so pandas is the reference for
-the boundary rules. Where pandas' own rolling implementation is unreliable — its
-incremental ``skew`` goes permanently NaN after a gap, see
-:func:`test_pandas_rolling_skew_is_the_one_that_is_wrong` — the reference is a
-brute-force per-window computation instead.
+the boundary rules. Shape statistics use a brute-force per-window reference
+because older pandas releases could leave rolling skewness permanently NaN
+after a gap; see :func:`test_rolling_skew_recovers_after_gaps`.
 """
 
 from __future__ import annotations
@@ -285,24 +284,23 @@ def test_shape_statistics_match_a_brute_force_reference(
     )
 
 
-def test_pandas_rolling_skew_is_the_one_that_is_wrong(
+def test_rolling_skew_recovers_after_gaps(
     gappy: tuple[np.ndarray, np.ndarray, pd.Series],
 ) -> None:
-    """Document why skewness is not checked against ``pandas.rolling``.
+    """Only windows lacking three observations should be missing.
 
-    pandas computes rolling skewness incrementally. On this input its result
-    turns NaN at index 21 and never recovers, reporting 28 missing values where
-    only 12 windows genuinely lack enough observations.
+    Older pandas releases reported 28 missing values on this input instead of
+    12. Check hazure against independent per-window reductions so upstream
+    rolling fixes do not affect this regression test.
     """
-    values, _, series = gappy
+    values, _, _ = gappy
     reference = brute_force(values, 3, "skew", 3)
-    theirs = series.rolling(3).skew().to_numpy()
+    result = rolling(values, 3, "skew")
 
-    assert np.isnan(reference).sum() == 12
-    assert np.isnan(theirs).sum() == 28
-    np.testing.assert_allclose(
-        rolling(values, 3, "skew"), reference, equal_nan=True, rtol=1e-9
+    np.testing.assert_array_equal(
+        np.flatnonzero(np.isnan(result)), [0, 1, 3, 4, 5, 17, 18, 19, 20, 31, 32, 33]
     )
+    np.testing.assert_allclose(result, reference, equal_nan=True, rtol=1e-9)
 
 
 def test_skewness_needs_three_observations() -> None:
