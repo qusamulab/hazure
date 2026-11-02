@@ -104,8 +104,9 @@ jobs:
           import sys
           import numpy as np
           import hazure
-          from hazure import Graph, Node, TimeSeries, detectors
+          from hazure import AlertPolicy, Graph, Node, TimeSeries, detectors, explain
           from hazure.ensemble import OrAggregator
+          from hazure.evaluation import backtest
 
           forbidden = {'pandas', 'polars', 'pyarrow', 'scipy', 'sklearn',
                        'matplotlib', 'statsmodels', 'stumpy', 'ruptures', 'numba'}
@@ -134,6 +135,30 @@ jobs:
               Node('either', OrAggregator(), inputs=('spike', 'shift')),
           ])
           assert graph.fit_detect(series).n_rows == 400
+
+          labels = detectors.limits(high=3).detect(series)
+          pulses = AlertPolicy(2, '6h').apply(labels)
+          assert np.flatnonzero(pulses.values[:, 0]).tolist() == [301]
+          result = backtest(
+              detectors.limits(high=3), series, labels, n_splits=2,
+              alert_policy=AlertPolicy(2, '6h'),
+          )
+          assert len(result.folds) == 2
+          assert all(row['f1'] == 1 for row in result.to_records())
+          assert explain(graph, series).output.n_rows == 400
+
+          base = np.arange(12.0)
+          normal = TimeSeries.from_arrays(
+              time[:12], np.column_stack([base, 2 * base]), ['a', 'b'],
+          )
+          pca = detectors.pca(k=1).fit(normal)
+          changed = normal.values.copy()
+          changed[6, 1] += 20
+          detail = explain(pca, normal.wrap(changed))
+          assert np.allclose(
+              detail.contributions.values.sum(axis=1),
+              detail.scores.values[:, 0],
+          )
 
           leaked = forbidden & set(sys.modules)
           assert not leaked, f'detecting pulled in {leaked}'

@@ -94,3 +94,18 @@ class _PcaBase(Transformer):
         """Return the points those component scores stand for, back in column space."""
         rebuilt: NDArray[np.float64] = self.mean_ + scores @ self.components_
         return rebuilt
+
+    def _column_error(self, ts: TimeSeries) -> NDArray[np.float64]:
+        """Return the fitted subspace's squared residual for each input column."""
+        squared, complete = self._squared_residuals(ts)
+        parts = np.full_like(ts.values, np.nan)
+        parts[complete] = squared
+        return parts
+
+    def _squared_residuals(
+        self, ts: TimeSeries
+    ) -> tuple[NDArray[np.float64], NDArray[np.bool_]]:
+        """Keep complete rows compact when only the total error is required."""
+        scores, complete = self._project(ts)
+        rebuilt = self._reconstruct(scores[complete])
+        return (ts.values[complete] - rebuilt) ** 2, complete

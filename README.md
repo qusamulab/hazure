@@ -70,6 +70,13 @@ stream.update("2024-03-22T00:00", 105.0)  # in line with the fortnight -> 0.0
 stream.update("2024-03-22T01:00", 12.0)  # not in line with it -> 1.0
 ```
 
+`AlertPolicy` turns those labels into notification pulses, requiring consecutive
+anomalies and enforcing a per-column cooldown. Use `backtest` from
+`hazure.evaluation` to compare detectors on held-out history, and `explain` to
+inspect actual scores, branch outputs and PCA column contributions. The
+[monitoring workflow](https://qusamulab.github.io/hazure/monitoring/) connects all
+three, including streaming and state persistence.
+
 ## Where to draw the line
 
 Every threshold is parameterised by *something*, and none of those somethings is
@@ -88,6 +95,8 @@ far as that allows and no further.
   end to end: detect, convert to intervals, score, plot.
 - [Guide](https://qusamulab.github.io/hazure/guide/) — which detector suits which
   kind of anomaly, and the two behaviours that surprise people most.
+- [Monitoring workflow](https://qusamulab.github.io/hazure/monitoring/) — compare
+  detectors, inspect verdicts and suppress repeated notifications.
 - [How it works](https://qusamulab.github.io/hazure/algorithms/) — the mathematics of
   every scorer, threshold and metric, and where each one's assumptions run out.
 - [API reference](https://qusamulab.github.io/hazure/api/) — every public name.

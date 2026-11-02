@@ -1,8 +1,9 @@
 # API reference
 
-Every public name, grouped by the module it lives in. The component types, the
-`TimeSeries` boundary and the structures that combine components are importable
-straight from `hazure`; everything else from the module listed here.
+Every public name, grouped by the module it lives in. Component types,
+`TimeSeries`, composition structures, `Stream`, `AlertPolicy` and explanation
+helpers are importable straight from `hazure`; other names from the module
+listed here.
 
 ## `hazure`
 
@@ -67,7 +68,7 @@ thing.
 ## `hazure.evaluation`
 
 Point- and event-based metrics, how late each alert was, threshold-free ranking
-quality, and time-ordered folds to compute any of them over.
+quality, and time-ordered backtests comparing fresh detector clones.
 
 ::: hazure.evaluation
 
@@ -84,6 +85,19 @@ Driving a fitted component one observation at a time, for a series that is still
 being produced.
 
 ::: hazure.streaming
+
+## `hazure.alerts`
+
+Notification pulses from consecutive anomalous labels, with per-column cooldown
+and resumable state. Detection labels remain separate from notification decisions.
+
+::: hazure.alerts
+
+## `hazure.explanation`
+
+Actual scores, intermediate branch outputs and fitted PCA error contributions.
+
+::: hazure.explanation
 
 ## `hazure.datasets`
 

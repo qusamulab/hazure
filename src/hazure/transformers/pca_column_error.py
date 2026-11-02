@@ -4,8 +4,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import numpy as np
-
 if TYPE_CHECKING:
     from hazure._core import TimeSeries
 
@@ -94,10 +92,4 @@ class PcaColumnError(_PcaBase):
     """
 
     def _compute(self, ts: TimeSeries) -> TimeSeries:
-        scores, complete = self._project(ts)
-        parts = np.full_like(ts.values, np.nan)
-        rebuilt = self._reconstruct(scores[complete])
-        # The same residual PcaReconstructionError squares and sums, left
-        # unsummed: one term per column, so the columns are the score's addends.
-        parts[complete] = (ts.values[complete] - rebuilt) ** 2
-        return ts.wrap(parts, ts.columns)
+        return ts.wrap(self._column_error(ts), ts.columns)

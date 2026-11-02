@@ -36,8 +36,10 @@ src/hazure/
 ├── transformers/          # Feature transformations
 ├── ensemble/              # Combining scores or labels
 ├── events/                # Intervals and per-sample label conversion
-├── evaluation/            # Metrics and time-ordered data splits
+├── evaluation/            # Metrics, time-ordered splits and detector backtests
+├── alerts/                # Stateful notification decisions from labels
 ├── datasets/              # Synthetic data and benchmark loaders
+├── explanation.py         # Trace fitted components and PCA error contributions
 ├── streaming.py           # Buffered execution of a fitted component
 └── plotting.py            # Optional visualisation
 ```
@@ -53,6 +55,9 @@ src/hazure/
   representation for Mermaid output; graph execution does not depend on pipelines.
 - Calibration policies share input handling and candidate generation, while each
   policy owns its objective and search.
+- Notification policies consume labels independently of detection and streaming
+  buffers. Backtests fit fresh clones and score raw labels before notification
+  suppression. Explanations trace fitted components without refitting them.
 - Internal modules import their owning subpackage or `_core`, never the `hazure`
   package root. Optional libraries are imported only when needed by an operation.
 
