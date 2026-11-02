@@ -50,8 +50,7 @@ class PcaReconstructionError(_PcaBase):
     """
 
     def _compute(self, ts: TimeSeries) -> TimeSeries:
-        scores, complete = self._project(ts)
+        squared, complete = self._squared_residuals(ts)
         error = np.full(ts.n_rows, np.nan, dtype=np.float64)
-        rebuilt = self._reconstruct(scores[complete])
-        error[complete] = ((ts.values[complete] - rebuilt) ** 2).sum(axis=1)
+        error[complete] = squared.sum(axis=1)
         return ts.wrap(error, ["error"])

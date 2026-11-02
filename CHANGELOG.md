@@ -6,6 +6,21 @@ Notable changes to `hazure`, newest first. The format follows
 version is 0, a minor bump may still break an interface, and the changelog will
 say so.
 
+## Unreleased
+
+### Added
+
+- `AlertPolicy` requires consecutive anomalous observations and applies a
+  per-column cooldown before emitting notification pulses. Batch and live
+  processing share resumable JSON state without changing detector labels.
+- `hazure.evaluation.backtest` compares fresh detector clones on chronological
+  folds, with detection metrics, alert counts, optional notification counts and
+  online evaluation through `Stream`.
+- `explain` returns actual fitted-model outputs, detector scores, pipeline and
+  graph steps, and squared PCA column residuals from the same fitted subspace.
+- A monitoring workflow guide connecting comparison, explanation and live
+  notification decisions.
+
 ## 0.2.0 — 2026-09-25
 
 A redesign of the public API and of the core. **This release breaks almost every

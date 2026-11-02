@@ -40,6 +40,7 @@ nav:
   - Home: index.md
   - Quickstart: quickstart.md
   - Guide: guide.md
+  - Monitoring workflow: monitoring.md
   - How it works:
       - algorithms/index.md
       - Rolling comparisons: algorithms/rolling.md

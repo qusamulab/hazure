@@ -39,8 +39,8 @@ Runtime dependencies are ``narwhals`` and ``numpy``. SciPy, scikit-learn,
 statsmodels, matplotlib, stumpy and ruptures are extras, imported only by the
 components that need them.
 
-This namespace holds the types and the structures that combine them. Everything
-else lives in a module named for what it holds:
+This namespace holds the types, composition structures and monitoring helpers.
+The remaining APIs live in modules named for what they hold:
 
 ``hazure.detectors``
     Ready-made detectors, one function per kind of anomaly.
@@ -56,7 +56,11 @@ else lives in a module named for what it holds:
     Moving between per-sample labels and anomalous intervals.
 ``hazure.evaluation``
     Metrics — how much was caught, how late, how well ranked — and time-ordered
-    folds to compute them over.
+    backtests that compare detectors on held-out folds.
+``hazure.alerts``
+    Notification decisions with consecutive-label rules and per-column cooldown.
+``hazure.explanation``
+    Actual scores, branch verdicts and fitted PCA column contributions.
 ``hazure.calibration``
     Choosing where to draw the line: from labelled events, or from an alert
     budget.
@@ -87,15 +91,19 @@ from hazure._core import (
     TimeSeries,
     Transformer,
 )
+from hazure.alerts import AlertPolicy
 from hazure.compose import Graph, Node, Pipeline
+from hazure.explanation import Explanation, explain
 from hazure.streaming import Stream
 
 __version__ = "0.2.0"
 
 __all__ = [
     "Aggregator",
+    "AlertPolicy",
     "Component",
     "Detector",
+    "Explanation",
     "Graph",
     "Node",
     "Pipeline",
@@ -110,6 +118,7 @@ __all__ = [
     "ensemble",
     "evaluation",
     "events",
+    "explain",
     "scorers",
     "thresholds",
     "transformers",

@@ -15,17 +15,25 @@ the fence you put around it.
 :func:`split_train_test` builds time-ordered folds. Shuffling is not an option for
 a time series, so the four schemes it offers differ in how the training window
 grows and where the test block sits.
+
+:func:`backtest` fits fresh detector clones on those folds and returns held-out
+labels, metrics and comparison records. Optional notification policies add pulse
+counts; optional stream history evaluates test observations as they arrive.
 """
 
 from __future__ import annotations
 
+from hazure.evaluation.backtest import BacktestFold, BacktestResult, backtest
 from hazure.evaluation.delay import detection_delay, detection_delays
 from hazure.evaluation.metrics import f1_score, iou, precision, recall
 from hazure.evaluation.ranking import average_precision, roc_auc
 from hazure.evaluation.split import split_train_test
 
 __all__ = [
+    "BacktestFold",
+    "BacktestResult",
     "average_precision",
+    "backtest",
     "detection_delay",
     "detection_delays",
     "f1_score",

@@ -23,6 +23,7 @@ import pytest
 import hazure
 
 MODULES = (
+    "hazure.alerts",
     "hazure.calibration",
     "hazure.compose",
     "hazure.datasets",
@@ -30,6 +31,7 @@ MODULES = (
     "hazure.ensemble",
     "hazure.evaluation",
     "hazure.events",
+    "hazure.explanation",
     "hazure.scorers",
     "hazure.streaming",
     "hazure.thresholds",
