@@ -17,7 +17,6 @@ from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 from hypothesis.extra import numpy as npst
 
-from hazure._core import window as window_module
 from hazure._core.window import (
     AGGREGATIONS,
     aggregate_windows,
@@ -27,6 +26,7 @@ from hazure._core.window import (
     rolling,
     window_bounds,
 )
+from hazure._core.window import _aggregate as aggregate_module
 
 # Statistics where pandas' rolling implementation is trustworthy.
 PANDAS_SAFE = ("sum", "mean", "median", "min", "max", "std", "var")
@@ -665,7 +665,7 @@ def test_chunking_does_not_change_the_result(
     """Peak memory is bounded by chunking rows; results must not depend on it."""
     values, _, _ = gappy
     expected = rolling(values, 9, "median", min_periods=1)
-    monkeypatch.setattr(window_module, "_MAX_BLOCK_ELEMENTS", 9)
+    monkeypatch.setattr(aggregate_module, "_MAX_BLOCK_ELEMENTS", 9)
     np.testing.assert_allclose(
         rolling(values, 9, "median", min_periods=1), expected, equal_nan=True
     )

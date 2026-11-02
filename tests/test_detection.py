@@ -24,7 +24,7 @@ from hazure.thresholds import (
     SignedThreshold,
 )
 from hazure.transformers import DoubleRollingAggregate
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 # -- helpers ----------------------------------------------------------------
 

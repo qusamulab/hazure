@@ -26,7 +26,7 @@ from hazure import (
     detectors,
 )
 from hazure._core import Configurable
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 # -- test doubles -----------------------------------------------------------
 

@@ -29,7 +29,7 @@ from hazure.transformers import (
     RollingAggregate,
     SeasonalDecomposition,
 )
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 # -- helpers ----------------------------------------------------------------
 

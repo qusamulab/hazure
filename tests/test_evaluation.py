@@ -20,7 +20,7 @@ from hazure.evaluation import (
     roc_auc,
 )
 from hazure.events import Events, to_events
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 HOUR = 3_600_000_000_000
 

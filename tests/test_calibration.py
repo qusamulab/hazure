@@ -14,7 +14,7 @@ import pytest
 from hazure.calibration import Calibration, budget_threshold, tune_threshold
 from hazure.events import Events, to_events
 from hazure.thresholds import FixedThreshold
-from tests.conftest import make_native
+from tests.helpers import make_native
 
 HOUR = 3_600_000_000_000
 

@@ -23,7 +23,7 @@ from hazure.ensemble import (
 )
 from hazure.scorers import AsScorer, DeviationScorer
 from hazure.transformers import DoubleRollingAggregate
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 if TYPE_CHECKING:
     from hazure import Aggregator

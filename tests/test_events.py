@@ -14,7 +14,7 @@ import pytest
 from hazure import TimeSeries
 from hazure.evaluation import split_train_test
 from hazure.events import Events, expand_events, to_events, to_labels, validate_series
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 HOUR = 3_600_000_000_000
 DAY = 24 * HOUR
