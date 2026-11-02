@@ -30,7 +30,7 @@ from hazure.thresholds.pot import (
     _log_likelihood,
     _stationary_points,
 )
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 if TYPE_CHECKING:
     from collections.abc import Callable

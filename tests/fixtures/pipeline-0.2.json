@@ -1,0 +1,134 @@
+{
+  "model": {
+    "hazure": "0.2.0",
+    "type": "hazure.compose.Pipeline",
+    "state": {
+      "steps": [
+        {
+          "__tuple__": [
+            "scale",
+            {
+              "__component__": {
+                "hazure": "0.2.0",
+                "type": "hazure.transformers.standard_scale.StandardScale",
+                "state": {
+                  "_fitted": true,
+                  "_feature_names": {
+                    "__tuple__": [
+                      "value"
+                    ]
+                  },
+                  "_column_models": null
+                }
+              }
+            }
+          ]
+        },
+        {
+          "__tuple__": [
+            "score",
+            {
+              "__component__": {
+                "hazure": "0.2.0",
+                "type": "hazure.scorers.deviation.DeviationScorer",
+                "state": {
+                  "center": "median",
+                  "scale": "iqr",
+                  "center_": -0.37141681498075774,
+                  "scale_": 0.31835726998350666,
+                  "_fitted": true,
+                  "_feature_names": {
+                    "__tuple__": [
+                      "value"
+                    ]
+                  },
+                  "_column_models": null
+                }
+              }
+            }
+          ]
+        },
+        {
+          "__tuple__": [
+            "cut",
+            {
+              "__component__": {
+                "hazure": "0.2.0",
+                "type": "hazure.thresholds.fixed.FixedThreshold",
+                "state": {
+                  "low": null,
+                  "high": 2.0,
+                  "_fitted": true,
+                  "_feature_names": {
+                    "__tuple__": [
+                      "value"
+                    ]
+                  },
+                  "_column_models": null
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "_fitted": true,
+      "_feature_names": {
+        "__tuple__": [
+          "value"
+        ]
+      },
+      "_column_models": null
+    }
+  },
+  "time": [
+    0,
+    3600000000000,
+    7200000000000,
+    10800000000000,
+    14400000000000,
+    18000000000000
+  ],
+  "values": [
+    [
+      1.0
+    ],
+    [
+      2.0
+    ],
+    [
+      1.0
+    ],
+    [
+      2.0
+    ],
+    [
+      1.0
+    ],
+    [
+      9.0
+    ]
+  ],
+  "columns": [
+    "value"
+  ],
+  "expected": [
+    [
+      0.0
+    ],
+    [
+      0.0
+    ],
+    [
+      0.0
+    ],
+    [
+      0.0
+    ],
+    [
+      0.0
+    ],
+    [
+      1.0
+    ]
+  ]
+}

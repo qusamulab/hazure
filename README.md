@@ -92,6 +92,9 @@ far as that allows and no further.
   every scorer, threshold and metric, and where each one's assumptions run out.
 - [API reference](https://qusamulab.github.io/hazure/api/) — every public name.
 
+For the source layout, dependency boundaries and local checks, see
+[Contributing](https://github.com/qusamulab/hazure/blob/main/CONTRIBUTING.md).
+
 ## Details
 
 - Python 3.11 and newer.

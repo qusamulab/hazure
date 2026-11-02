@@ -12,7 +12,8 @@ import numpy as np
 # Private, but the same package: Events has to speak exactly the nanosecond
 # dialect TimeSeries speaks, and a second copy of the datetime64 corner cases
 # would be free to drift away from it.
-from hazure._core.series import NO_BACKEND, Origin, _as_epoch_ns, _from_epoch_ns
+from hazure._core.series import NO_BACKEND, Origin
+from hazure._core.time import _as_epoch_ns, _from_epoch_ns
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

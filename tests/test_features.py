@@ -28,7 +28,7 @@ from hazure.transformers import (
     StandardScale,
     SumAll,
 )
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 if TYPE_CHECKING:
     from hazure import Transformer

@@ -9,11 +9,15 @@ time and so quietly breaks the "narwhals and numpy only" promise the README make
 from __future__ import annotations
 
 import ast
+import json
+import pickle
 import subprocess
 import sys
+from importlib import import_module
 from importlib.metadata import version
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 import hazure
@@ -59,6 +63,42 @@ def test_every_promised_name_exists() -> None:
 
 def test_all_has_no_duplicates() -> None:
     assert len(hazure.__all__) == len(set(hazure.__all__))
+
+
+@pytest.mark.parametrize(
+    ("module", "name"),
+    [
+        ("hazure._core.series", "TimeSeries"),
+        ("hazure._core.series", "Origin"),
+        ("hazure.compose", "Pipeline"),
+        ("hazure.compose", "Graph"),
+        ("hazure.compose", "Node"),
+        ("hazure.calibration", "Calibration"),
+    ],
+)
+def test_public_class_paths_stay_compatible_with_saved_objects(
+    module: str, name: str
+) -> None:
+    cls = getattr(import_module(module), name)
+    assert cls.__module__ == module
+    assert pickle.loads(pickle.dumps(cls)) is cls
+
+
+def test_a_pipeline_saved_before_the_package_reorganisation_still_runs() -> None:
+    """Load a real 0.2 payload, rather than round-tripping the new layout."""
+    fixture_path = Path(__file__).parents[1] / "fixtures" / "pipeline-0.2.json"
+    fixture = json.loads(fixture_path.read_text())
+    series = hazure.TimeSeries.from_arrays(
+        np.asarray(fixture["time"], dtype=np.int64),
+        np.asarray(fixture["values"]),
+        fixture["columns"],
+    )
+
+    restored = hazure.Component.from_dict(fixture["model"])
+
+    assert isinstance(restored, hazure.Pipeline)
+    np.testing.assert_array_equal(restored.run(series).values, fixture["expected"])
+    assert restored.to_dict() == fixture["model"]
 
 
 @pytest.mark.parametrize("module", MODULES)

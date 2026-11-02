@@ -23,7 +23,7 @@ from hazure.thresholds import (
     QuantileThreshold,
     SignedThreshold,
 )
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 # -- helpers ----------------------------------------------------------------
 

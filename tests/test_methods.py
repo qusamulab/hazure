@@ -28,7 +28,7 @@ from hazure.scorers import (
     SpectralResidualScorer,
     StlResidualScorer,
 )
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

@@ -15,7 +15,7 @@ import pytest
 from hazure import Aggregator, Detector, Scorer, Threshold, TimeSeries, Transformer
 from hazure.compose import SOURCE, Graph, Node, Pipeline
 from hazure.transformers import double_rolling, rolling
-from tests.conftest import BACKENDS, make_native
+from tests.helpers import BACKENDS, make_native
 
 # -- stand-ins --------------------------------------------------------------
 
